@@ -1,14 +1,18 @@
 import os
 
 import redis
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi_socketio import SocketManager
 from sqlalchemy import create_engine
 
+# Load environment variables
+load_dotenv()
+
 app = FastAPI()
 socket_manager = SocketManager(app=app)
 
-# Use environment variables set in docker-compose.yml
+# Use environment variables
 DATABASE_URL = os.getenv("DATABASE_URL")
 REDIS_URL = os.getenv("REDIS_URL")
 
@@ -18,20 +22,8 @@ if not DATABASE_URL:
 if not REDIS_URL:
     raise ValueError("ERROR: REDIS_URL environment variable is not set.")
 
-# Get SQLAlchemy engine
+# Get postgres engine and redis client
 engine = create_engine(DATABASE_URL)
-
-
-# Get Redis connection
-def get_redis():
-    try:
-        return redis.Redis.from_url(REDIS_URL, decode_responses=True)
-    except redis.RedisError as e:
-        print(f"Redis connection failed: {e}")
-        return None
-
-
-# Create a Redis client
 redis_client = get_redis()
 
 

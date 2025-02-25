@@ -5,36 +5,15 @@ services:
       dockerfile: Dockerfile
     container_name: fastapi_api
     restart: always
-    environment:
-      - DATABASE_URL=postgresql://admin:password@db:5432/gender_reveal_puzzle_db
-      - REDIS_URL=redis://redis:6379/0
+    env_file:
+      - .env
     ports:
       - 8000:8000
     volumes:
       - .:/app
     depends_on:
-      db:
-        condition: service_healthy
       redis:
         condition: service_healthy
-
-  db:
-    image: postgres:latest
-    container_name: postgres_db
-    restart: always
-    environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=gender_reveal_puzzle_db
-    ports:
-      - 5432:5432
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin -d gender_reveal_puzzle_db || exit 1"]
-      interval: 10s
-      retries: 5
-      start_period: 10s
 
   redis:
     image: redis:latest
