@@ -1,0 +1,12 @@
+{
+  "cSpell.words": [
+    "fastapi",
+    "healthcheck",
+    "isready",
+    "psycopg",
+    "PYTHONUNBUFFERED",
+    "socketio",
+    "sqlalchemy",
+    "uvicorn"
+  ]
+}
