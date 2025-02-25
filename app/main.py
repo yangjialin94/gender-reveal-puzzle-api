@@ -24,7 +24,7 @@ if not REDIS_URL:
 
 # Get postgres engine and redis client
 engine = create_engine(DATABASE_URL)
-redis_client = get_redis()
+redis_client = redis.Redis.from_url(REDIS_URL)
 
 
 @app.get("/")
