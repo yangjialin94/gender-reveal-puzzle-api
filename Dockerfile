@@ -13,6 +13,9 @@ COPY requirements.txt .
 # Install the required dependencies
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
+# Install psycopg2 manually
+RUN pip install psycopg2-binary
+
 # Copy the rest of the application code to the working directory
 COPY . .
 

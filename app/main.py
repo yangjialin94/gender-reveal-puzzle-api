@@ -1,5 +1,6 @@
 import os
 
+import psycopg2.binary
 import redis
 from dotenv import load_dotenv
 from fastapi import FastAPI
