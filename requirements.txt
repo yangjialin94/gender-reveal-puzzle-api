@@ -1,8 +1,1 @@
-fastapi
-uvicorn
-sqlalchemy
-psycopg2
-redis
-fastapi-socketio
-python-dotenv
-psycopg2-binary
+
