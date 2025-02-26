@@ -32,6 +32,16 @@ def read_root():
     return {"message": "Gender Reveal Puzzle Backend is Running!"}
 
 
+@app.get("/test-db")
+def test_db():
+    try:
+        conn = psycopg2.connect(DATABASE_URL)
+        conn.close()
+        return {"message": "✅ Successfully connected to Supabase from Railway!"}
+    except Exception as e:
+        return {"error": str(e)}
+
+
 if __name__ == "__main__":
     import uvicorn
 
